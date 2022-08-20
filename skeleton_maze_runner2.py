@@ -1,6 +1,7 @@
 import sys
 import time
 import pygame
+import os
 from enemies import Enemies
 from towers import Towers
 from matrix import Matrixgrid
@@ -73,11 +74,12 @@ screen = pygame.display.set_mode((field_width * tile_size, field_height * tile_s
 
 # Загрузка изображений
 bg_surf = pygame.image.load('background'+str(field_width)+'x'+str(field_height)+'x'+str(tile_size)+'.png').convert()
-stone = pygame.image.load('stone.png').convert()
-selection = pygame.image.load('selection.png').convert_alpha()
-heart = pygame.image.load('heart.png').convert_alpha()
-coin = pygame.image.load('coin.png').convert_alpha()
-tower = pygame.image.load('tower.png').convert_alpha()
+stone = pygame.image.load(os.path.join('towers/stone.png')).convert()
+selection = pygame.image.load(os.path.join('icons/selection.png')).convert_alpha()
+heart = pygame.image.load(os.path.join('icons/heart.png')).convert_alpha()
+coin = pygame.image.load(os.path.join('icons/coin.png')).convert_alpha()
+tower = pygame.image.load(os.path.join('towers/tower.png')).convert_alpha()
+
 
 lives = 4
 coins = 420
@@ -258,7 +260,6 @@ while True:
             (tower.grid_x * tile_size, tower.grid_y * tile_size)
         )
 
-
     # draw wave_path
     try:
         pygame.draw.lines(screen, '#4a4a4a', False, points, 5)
@@ -297,6 +298,7 @@ while True:
         font = pygame.font.Font(None, field_width*2)
         text = font.render("Wave "+str(wave)+" started!",True,yellow)
         screen.blit(text, [field_width // 3 * tile_size, 50])
+        
     if wave_stage:
         font = pygame.font.Font(None, field_width)
         text = font.render("Wave stage!",True,red)
