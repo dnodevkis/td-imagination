@@ -1,7 +1,9 @@
+from contextlib import nullcontext
 import sys
 import time
 import pygame
 import os
+import math
 from enemies import Enemies
 from towers import Towers
 from matrix import Matrixgrid
@@ -292,13 +294,27 @@ while True:
             enemy.pos,
         )
         enemy.update()
+        
+#Башни стреляют
+    for tower in  towers_list.copy():
+        tower: Towers
+    #Ищем башни у которых выстрел не в кд
+        if time.time() - tower.last_attack_time > tower.attack_speed:
+            #Ищем врагов вокруг башни
+            for enemy in wave_enemies.copy():
+                enemy: Enemies
+                #Ищем врага в радиусе башни (потом можно настроить алгоритмы: первый, последний, ближайший, лоухп)
+                if math.sqrt(math.abs((enemy.pos[0] // 32 - tower.grid_x)**2 + (enemy.pos[1]  // 32 - tower.grid_y)**2)) <= tower.attack_range:
+                    print("enemy has been attacked by tower")
+
+
 
     #Inform messages      
     if wave_spawn:
         font = pygame.font.Font(None, field_width*2)
         text = font.render("Wave "+str(wave)+" started!",True,yellow)
         screen.blit(text, [field_width // 3 * tile_size, 50])
-        
+
     if wave_stage:
         font = pygame.font.Font(None, field_width)
         text = font.render("Wave stage!",True,red)

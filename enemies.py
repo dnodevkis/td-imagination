@@ -9,7 +9,7 @@ class Enemies:
         # basic
         self.matrix = matrix
         self.tile = 32
-        self.image = pygame.image.load('enemy.png').convert_alpha()
+        self.image = pygame.image.load('icons/enemy.png').convert_alpha()
         self.rect = self.image.get_rect(center=(len(self.matrix[0]) * self.tile // 20, len(self.matrix) * self.tile // 2))
         #print('len matrix[0]', self.matrix[0])
        

@@ -13,8 +13,9 @@ class Towers:
         self.attack_speed = 2
         self.attack_damage = 1
         self.attack_range = 3
+        self.last_attack_time = 0
         self.projectile_type = 'arrow'
-        self.image = pygame.image.load('tower.png').convert_alpha()
+        self.image = pygame.image.load(os.path.join('towers/tower.png')).convert_alpha()
 
     def set_action(self, t_action, t_direction):
         
